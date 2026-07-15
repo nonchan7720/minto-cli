@@ -1,35 +1,64 @@
 # minto-cli
 
-[MinTo](https://mintoai.net/) 静的サイトホスティングサービスのコマンドラインクライアントです。
-デプロイ・サイト管理・課金操作に加えて、AIエージェント（Claude Code など）向けの操作スキルを配布します。
+[MinTo](https://mintoai.net/) 静的サイトホスティングサービスの公式CLIです。
+デプロイ、サイト管理、課金、お問い合わせフォームの作成までターミナルから行えます。
 
-バイナリのソースおよびリリース定義は nonchan7720/minto（プライベートリポジトリ）の
-`pkg/cmd/minto-cli` にあり、本リポジトリはビルド済みバイナリの配布（GitHub Releases）先です。
+## できること
+
+- **デプロイ**: ディレクトリやzipを指定するだけでサイトを公開
+- **サイト管理**: サイトの作成・更新・削除・一覧
+- **課金管理**: プランの購入やStripeカスタマーポータルの利用
+- **AIエージェント連携**: Claude Code などにMinToの操作方法を学習させるスキルを配布（お問い合わせフォームの作成にも対応）
 
 ## インストール
 
-[Releases](https://github.com/nonchan7720/minto-cli/releases) から OS/アーキテクチャに合ったバイナリをダウンロードしてください。
+[Releases](https://github.com/nonchan7720/minto-cli/releases) から OS/アーキテクチャに合ったバイナリをダウンロードし、PATHの通った場所に配置してください。
 
 ```bash
 minto-cli --help
 ```
 
-## 基本コマンド
+## クイックスタート
 
 ```bash
-# ログイン（ブラウザでOAuth 2.1 PKCE）
+# 1. ログイン（ブラウザが開きます）
 minto-cli login
 
-# サイトへデプロイ
-minto-cli deploy ./dist --site-id <UUID>
+# 2. サイトを作成
+minto-cli sites create --name "My App" --subdomain myapp
 
-# サイト管理
-minto-cli sites list --team-id <UUID>
-minto-cli sites create --name "My Site" --subdomain mysite --team-id <UUID>
+# 3. ビルド結果をデプロイ
+minto-cli deploy ./dist
 
-# 課金
-minto-cli billing checkout --org-id <UUID> --plan essential
+# 4. デプロイ状況を確認
+minto-cli status <deployment_id>
 ```
+
+`--site-id` などのIDを省略すると、対話形式で選択できます（ターミナルで実行している場合）。
+
+## コマンド一覧
+
+| コマンド | 説明 |
+| --- | --- |
+| `minto-cli login` | ブラウザ経由でログインし、トークンを保存 |
+| `minto-cli deploy <path>` | ディレクトリ / zip をデプロイ |
+| `minto-cli status <deployment_id>` | デプロイ状況を確認 |
+| `minto-cli sites list` | サイト一覧を表示 |
+| `minto-cli sites create` | サイトを新規作成 |
+| `minto-cli sites update` | サイト情報を更新 |
+| `minto-cli sites delete` | サイトを削除 |
+| `minto-cli billing checkout` | 課金プランのチェックアウトを開始 |
+| `minto-cli billing portal` | Stripeカスタマーポータルを開く |
+| `minto-cli skills` | AIエージェント向けスキルをプロジェクトにインストール |
+
+各コマンドの詳しいオプションは `minto-cli <command> --help` で確認できます。
+
+### グローバルフラグ
+
+| フラグ | デフォルト | 説明 |
+| --- | --- | --- |
+| `--server` | `https://api.mintoai.net` | 接続先のMinTo APIサーバー |
+| `--token` | (保存済みトークン) | 認証トークン（未指定時は `minto-cli login` で保存したものを使用） |
 
 ## AIエージェント向けスキル
 
@@ -37,16 +66,7 @@ minto-cli billing checkout --org-id <UUID> --plan essential
 minto-cli skills
 ```
 
-現在のディレクトリに `.agents/skills/minto-cli/SKILL.md` を作成し、`.claude/` が存在する場合は
-`.claude/skills/minto-cli` へのシンボリックリンク作成を確認します。これにより Claude Code などの
-AIエージェントが minto-cli の操作方法を理解できるようになります。
+プロジェクトに `.agents/skills/minto-cli/SKILL.md` を作成します（`.claude/` があれば `.claude/skills/minto-cli` へのリンク作成も選べます）。これにより Claude Code などのAIエージェントが、会話だけでMinToの操作を代行できるようになります。
 
-スキルには以下が含まれます。
-
-- **デプロイ / サイト管理 / 課金**: `minto-cli` の各コマンドをCLIフラグ付きで呼び出す方法（非TTY環境向け）
-- **お問い合わせフォーム作成・管理**: MinTo の MCP サーバーが提供する `form_create` / `form_update` /
-  `form_delete` / `form_list` / `form_submissions_list` / `form_submission_thread` ツールを使って、
-  会話的な依頼（例:「問い合わせフォームを付けて」）からフォームを設計・埋め込み・再デプロイするフロー
-
-スキルの内容は nonchan7720/minto（プライベートリポジトリ）の
-`pkg/cmd/client/templates/SKILL.md` で管理されています。
+- **デプロイ / サイト管理 / 課金**: 各コマンドをどう呼び出せばよいかをエージェントに教えます
+- **お問い合わせフォームの作成・管理**: 「問い合わせフォームを付けて」のような依頼から、フォームの設計・サイトへの埋め込み・再デプロイまでを一気に行えるようになります
