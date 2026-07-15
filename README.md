@@ -71,7 +71,8 @@ minto-cli status <deployment_id>
 
 ### プラグインとしてインストール（推奨・Claude Code）
 
-スキルとMCPサーバー接続をまとめてセットアップできます。事前に `minto-cli login` でログインしておいてください（MCPサーバーは、その際に保存されるトークンで認証します）。
+スキルとMCPサーバー接続をまとめてセットアップできます。MinToのMCPサーバーはOAuth2に対応しているため、
+初回利用時にClaude Codeがブラウザでのサインインを自動的に案内します。
 
 ```shell
 /plugin marketplace add nonchan7720/minto-cli
