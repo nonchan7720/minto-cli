@@ -62,13 +62,30 @@ minto-cli status <deployment_id>
 
 ## AIエージェント向けスキル
 
-```bash
-minto-cli skills
-```
-
-プロジェクトに `.agents/skills/minto-cli/SKILL.md` を作成します（`.claude/` があれば `.claude/skills/minto-cli` へのリンク作成も選べます）。これにより Claude Code などのAIエージェントが、会話だけでMinToの操作を代行できるようになります。
+本リポジトリは [`skills/minto-cli/SKILL.md`](skills/minto-cli/SKILL.md) として、Claude Code などの
+AIエージェントが会話だけでMinToの操作（デプロイ・サイト管理・課金・お問い合わせフォーム作成）を
+代行できるようになる Agent Skill を公開しています。
 
 - **デプロイ / サイト管理 / 課金**: 各コマンドをどう呼び出せばよいかをエージェントに教えます
 - **お問い合わせフォームの作成・管理**: 「問い合わせフォームを付けて」のような依頼から、フォームの設計・サイトへの埋め込み・再デプロイまでを一気に行えるようになります
 
-スキルの中身は本リポジトリの [`.agents/skills/minto-cli/SKILL.md`](.agents/skills/minto-cli/SKILL.md) で確認できます。
+### インストール方法
+
+このリポジトリをスキルのソースとして参照するツール（例: Claude Code のスキル管理、`gh skills` 等の
+Agent Skills 対応ツール）であれば、`nonchan7720/minto-cli` を指定するだけでインストールできます。
+
+```jsonc
+// 例: skills-lock.json
+{
+  "version": 1,
+  "skills": {
+    "minto-cli": {
+      "source": "nonchan7720/minto-cli",
+      "sourceType": "github"
+    }
+  }
+}
+```
+
+手動で使う場合は `skills/minto-cli/SKILL.md` をそのままプロジェクトの `.claude/skills/minto-cli/SKILL.md`
+（または各ツールが参照するスキルディレクトリ）にコピーしてください。
