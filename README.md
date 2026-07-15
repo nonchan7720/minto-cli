@@ -76,14 +76,14 @@ minto-cli status <deployment_id>
 
 ```shell
 /plugin marketplace add nonchan7720/minto-cli
-/plugin install minto-cli@minto-cli
+/plugin install minto@minto
 ```
 
 接続先を本番以外にしたい場合は、インストール時に `MinTo API サーバー URL`（`server_url`）を変更してください。
 
 ### スキル単体でのインストール（Claude Code以外 / `gh skills` など）
 
-プラグイン形式に対応していないツールでも、[`skills/minto-cli/SKILL.md`](skills/minto-cli/SKILL.md) を
+プラグイン形式に対応していないツールでも、[`skills/minto/SKILL.md`](skills/minto/SKILL.md) を
 スキル単体として参照・インストールできます。
 
 ```jsonc
@@ -91,7 +91,7 @@ minto-cli status <deployment_id>
 {
   "version": 1,
   "skills": {
-    "minto-cli": {
+    "minto": {
       "source": "nonchan7720/minto-cli",
       "sourceType": "github"
     }
@@ -99,6 +99,6 @@ minto-cli status <deployment_id>
 }
 ```
 
-手動で使う場合は `skills/minto-cli/SKILL.md` をそのままプロジェクトの `.claude/skills/minto-cli/SKILL.md`
+手動で使う場合は `skills/minto/SKILL.md` をそのままプロジェクトの `.claude/skills/minto/SKILL.md`
 （または各ツールが参照するスキルディレクトリ）にコピーしてください。この方法ではMCPサーバー接続は
 含まれないため、フォーム作成にはプラグインとしてのインストールが必要です。

@@ -1,5 +1,5 @@
 ---
-name: minto-cli
+name: minto
 description: MinTo CLI (minto-cli) — MinTo 静的サイトホスティングのデプロイ・サイト管理・課金・ステータス確認・お問い合わせフォーム作成を行うCLI/MCPツール。
 ---
 

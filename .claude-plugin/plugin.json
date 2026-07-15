@@ -1,6 +1,6 @@
 {
-  "name": "minto-cli",
-  "displayName": "MinTo CLI",
+  "name": "minto",
+  "displayName": "MinTo",
   "description": "MinTo 静的サイトホスティングのデプロイ・サイト管理・課金・お問い合わせフォーム作成を、会話とMCPサーバーで行えるようにするプラグイン。",
   "author": {
     "name": "nonchan7720"
