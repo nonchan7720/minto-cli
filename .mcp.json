@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "minto": {
+      "type": "http",
+      "url": "${user_config.server_url}/mcp",
+      "headersHelper": "${CLAUDE_PLUGIN_ROOT}/scripts/mcp-auth-headers.sh"
+    }
+  }
+}
