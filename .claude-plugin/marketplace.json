@@ -1,0 +1,14 @@
+{
+  "name": "minto",
+  "owner": {
+    "name": "nonchan7720"
+  },
+  "description": "MinTo 用の Agent Skills / MCPサーバー プラグイン",
+  "plugins": [
+    {
+      "name": "minto",
+      "source": "./",
+      "description": "MinTo 静的サイトホスティングのデプロイ・サイト管理・課金・お問い合わせフォーム作成を、会話とMCPサーバーで行えるようにするプラグイン。"
+    }
+  ]
+}

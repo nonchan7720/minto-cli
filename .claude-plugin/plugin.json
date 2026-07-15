@@ -1,0 +1,20 @@
+{
+  "name": "minto",
+  "displayName": "MinTo",
+  "description": "MinTo 静的サイトホスティングのデプロイ・サイト管理・課金・お問い合わせフォーム作成を、会話とMCPサーバーで行えるようにするプラグイン。",
+  "author": {
+    "name": "nonchan7720"
+  },
+  "homepage": "https://mintoai.net/",
+  "repository": "https://github.com/nonchan7720/minto-cli",
+  "license": "MIT",
+  "keywords": ["minto", "static-site-hosting", "deploy", "forms", "mcp"],
+  "userConfig": {
+    "server_url": {
+      "type": "string",
+      "title": "MinTo API サーバー URL",
+      "description": "接続先の MinTo API サーバー（末尾に /mcp は付けない）",
+      "default": "https://api.mintoai.net"
+    }
+  }
+}
